@@ -127,5 +127,3 @@ Error: ${JSON.stringify(error)}
 
   return false;
 });
-window.onerror = function(msg, url, line, col, error) {
-};

@@ -9,6 +9,7 @@ const { ExpressPeerServer } = require("peer");
 
 const app = express();
 
+app.get("/peerjs.min.js", (_, res) => res.sendFile(__dirname + "/peerjs.min.js"));
 app.get("/script.js", (_, res) => res.sendFile(__dirname + "/script.js"));
 app.get("/", (_, res) => res.sendFile(__dirname + "/index.html"));
 
