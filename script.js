@@ -108,4 +108,24 @@ peer.on("call", (call) => {
   }
 });
 
+window.addEventListener('error', function(e) {
+  const { message, filename, lineno, colno, error } = e;
+  const errorElement = document.createElement("div");
+  const errorMsg = document.createTextNode(
+    `${filename}:${lineno}:${colno} ${message}
+Error: ${JSON.stringify(error)}
+`
+  );
 
+  errorElement.appendChild(errorMsg);
+  errorElement.style.color = "red";
+  errorElement.style.backgroundColor = "lightgrey";
+  errorElement.style.padding = "10px";
+  errorElement.style.margin = "10px";
+
+  document.body.appendChild(errorElement);
+
+  return false;
+});
+window.onerror = function(msg, url, line, col, error) {
+};
