@@ -20,9 +20,6 @@ function getLocalStream() {
       window.localAudio.srcObject = stream; // B
       window.localAudio.autoplay = true; // C
     })
-    .catch((err) => {
-      console.error(`you got an error: ${err}`);
-    });
 }
 
 getLocalStream();
@@ -126,4 +123,23 @@ Error: ${JSON.stringify(error)}
   document.body.appendChild(errorElement);
 
   return false;
+});
+
+const muteBtn = document.getElementById('mute-btn');
+const localAudio = document.getElementById('localAudio');
+
+muteBtn.addEventListener('click', function () {
+  // If the localStream exists and it has an audio track
+  if (window.localStream && window.localStream.getAudioTracks().length > 0) {
+    // Get the first audio track
+    let audioTrack = window.localStream.getAudioTracks()[0];
+  
+    if (audioTrack.enabled) { // if the track is enabled
+      audioTrack.enabled = false;  // disable it
+      muteBtn.innerText = 'Unmute 🔊';
+    } else {
+      audioTrack.enabled = true;  // otherwise, enable it
+      muteBtn.innerText = 'Mute 🔇';
+    }
+  }
 });
